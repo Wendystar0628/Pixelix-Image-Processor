@@ -1,0 +1,103 @@
+软件架构说明文档
+
+1. 核心设计理念
+
+本应用遵循分层架构和依赖注入的设计原则，实现关注点分离和控制反转。
+
+- 高内聚：每个模块专注于明确定义的职责
+- 低耦合：模块间通过接口通信，依赖关系通过构造函数注入
+- 控制反转：依赖关系由外部容器管理
+- 接口隔离：核心服务定义抽象接口，实现与接口分离
+
+2. 架构分层
+
+采用四层分层架构，依赖关系：Application → Business Interfaces → Core Abstractions ← Infrastructure
+
+2.1 应用层 (Application Layer)
+- 路径: app/main.py, app/application_startup.py, app/models/app_config.py, app/config.py, app/core/container/, app/core/initialization/
+- 职责: 应用程序入口点、启动协调、配置数据模型、向后兼容性支持
+
+2.2 业务接口层 (Business Interfaces Layer)
+- 路径: app/core/interfaces/, app/core/models/
+- 职责: 定义业务领域接口、业务数据模型、为上层提供业务能力抽象
+
+2.3 核心抽象层 (Core Abstractions Layer)
+- 路径: app/core/abstractions/, app/core/adapters/, app/core/dependency_injection/
+- 职责: 定义最小基础设施接口、实现服务适配、管理依赖注入和服务桥接
+
+2.4 视图层 (View Layer)
+- 路径: app/ui/
+- 职责: 构建用户界面、捕获用户输入、通过信号发射用户意图
+- 关键组件: MainWindow、UI面板、对话框、UI管理器
+
+2.5 基础设施层 (Infrastructure Layer)
+- 路径: app/infrastructure/
+- 职责: 提供技术基础设施服务、配置管理、文件系统访问
+
+2.6 控制器/处理器层 (Controller/Handler Layer)
+- 路径: app/handlers/
+- 职责: 处理应用级业务流程、监听视图信号、协调核心服务交互
+- 关键组件: AppController、ProcessingHandler、FileHandler、PresetHandler
+
+2.7 特性层 (Features Layer)
+- 路径: app/features/
+- 职责: 实现独立的可插拔功能模块
+- 关键组件: 批处理特性模块
+
+2.8 模型/核心层 (Model/Core Layer)
+- 路径: app/core/ (排除interfaces/, abstractions/, adapters/, dependency_injection/)
+- 职责: 实现核心业务功能、数据结构和算法
+- 关键组件: StateManager、ImageProcessor、操作定义、命令模式实现
+
+3. 依赖注入流程
+
+应用启动时的自动依赖注入：
+1. main.py 创建 ApplicationStartup 实例
+2. 构建基础设施服务和配置适配器
+3. 创建依赖注入容器和服务桥接适配器
+4. 按分层顺序自动创建和注入服务
+5. 完成UI初始化和信号连接
+
+关键特点：
+- 自动依赖解析
+- 重入锁安全
+- 分层架构合规
+- 桥接适配器模式
+- 接口适配
+
+4. 桥接适配器模式
+
+为消除核心层对上层的直接依赖，实现桥接适配器模式：
+- 零上层导入
+- 服务访问统一
+- 分层架构合规
+- 最小化变更
+
+5. 配置服务架构
+
+配置服务调用链：核心业务组件 → ConfigAccessInterface → ConfigAccessAdapter → AppConfigService → ConfigManager → 配置文件
+
+特点：
+- 分层解耦
+- 适配器隔离
+- 单一职责
+- 向后兼容
+
+6. 信号槽机制
+
+使用PyQt6信号槽机制实现组件间通信：
+- UI组件通过信号发送用户操作
+- MainWindowConnectionManager集中管理信号槽连接
+- 控制器层监听信号并调用业务逻辑
+- 核心层通过信号通知状态变化
+
+7. 启动入口
+
+标准启动方式：python -m app.main
+
+启动流程：
+1. main.py创建ApplicationStartup实例
+2. ApplicationStartup协调完整启动流程
+3. 自动依赖注入容器解析和注入依赖
+4. 按四层架构创建服务
+5. 完成UI初始化和信号连接

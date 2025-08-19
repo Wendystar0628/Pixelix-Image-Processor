@@ -1,0 +1,14 @@
+{
+  "name": "增亮",
+  "operations": [
+    {
+      "operation_name": "BrightnessContrastOp",
+      "parameters": {
+        "brightness": 90,
+        "contrast": 0
+      }
+    }
+  ],
+  "description": "",
+  "created_at": "2025-08-01T23:11:55.713438"
+}

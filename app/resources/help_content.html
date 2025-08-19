@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>数字图像处理工坊 - 使用说明</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .highlight {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #17a2b8;
+            margin: 15px 0;
+        }
+        .shortcut {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        .menu-path {
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>数字图像处理工坊 - 使用说明</h1>
+    
+    <div class="section">
+        <h2>软件简介</h2>
+        <p>数字图像处理工坊是一款基于Python的图像处理软件，提供丰富的图像处理算法和实时预览功能。软件采用模块化设计，支持批量处理和效果预设管理。</p>
+
+    </div>
+    
+    <div class="section">
+        <h2>核心功能模块</h2>
+        
+        <h3>文件管理</h3>
+        <ul>
+            <li><strong>单文件导入</strong>：支持常见图像格式（JPG、PNG、BMP、TIFF等）</li>
+            <li><strong>文件夹导入</strong>：批量导入整个文件夹中的图像文件</li>
+            <li><strong>最近文件</strong>：快速访问最近打开的文件</li>
+        </ul>
+        
+        <h3>图像处理</h3>
+        <ul>
+            <li><strong>点运算</strong>：亮度/对比度、色彩平衡、色相/饱和度、曲线、色阶调整</li>
+            <li><strong>空间滤波</strong>：高斯模糊、边缘检测、锐化、均值滤波</li>
+            <li><strong>常规滤镜</strong>：艺术效果滤镜，包括油画、素描、怀旧、水彩等风格</li>
+            <li><strong>图像变换</strong>：多种算法的图像缩放和压缩</li>
+        </ul>
+        
+        <h3>数据分析</h3>
+        <ul>
+            <li><strong>直方图分析</strong>：RGB和灰度直方图显示</li>
+            <li><strong>色彩空间分析</strong>：HSV、Lab色彩空间可视化</li>
+            <li><strong>统计信息</strong>：图像基本统计数据</li>
+            <li><strong>数据导出</strong>：分析结果导出为图表或数据文件</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>基本操作流程</h2>
+        <ol>
+            <li><strong>导入图像</strong>：<span class="menu-path">从图像仓库导入</span> </li>
+
+            <li><strong>选择图像</strong>：在文件列表中选择要处理的图像</li>
+            <li><strong>应用处理</strong>：通过菜单选择处理操作，在对话框中调整参数</li>
+            <li><strong>实时预览</strong>：调整参数时查看实时预览效果</li>
+            <li><strong>确认应用</strong>：点击"确定"应用处理效果</li>
+            <li><strong>保存结果</strong>：<span class="menu-path">文件 → 保存</span> 保存处理后的图像</li>
+        </ol>
+    </div>
+    
+    <div class="section">
+        <h2>预设管理</h2>
+        <div class="highlight">
+            <p><strong>预设功能</strong>可以保存常用的处理效果组合，提高工作效率。</p>
+        </div>
+        <ul>
+            <li><strong>保存预设</strong>：<span class="menu-path">预设 → 将当前效果另存为预设</span></li>
+            <li><strong>应用预设</strong>：<span class="menu-path">预设 → 快速应用预设</span></li>
+            <li><strong>管理预设</strong>：<span class="menu-path">预设 → 删除预设</span></li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>常用快捷键</h2>
+        <ul>
+            <li><span class="shortcut">Ctrl+Shift+O</span>：导入文件夹</li>
+            <li><span class="shortcut">Ctrl+S</span>：保存当前图像</li>
+            <li><span class="shortcut">Ctrl+Z</span>：撤销操作</li>
+            <li><span class="shortcut">Ctrl+Y</span>：重做操作</li>
+            <li><span class="shortcut">Ctrl+Shift+C</span>：清除所有效果</li>
+            <li><span class="shortcut">F1</span>：显示此帮助文档</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>使用技巧</h2>
+        <ul>
+            <li><strong>性能优化</strong>：在<span class="menu-path">工具 → 代理图像质量</span>中调整预览质量以平衡性能和效果</li>
+            <li><strong>批量处理</strong>：导入文件夹后可对多个图像应用相同的处理效果</li>
+            <li><strong>效果叠加</strong>：可以连续应用多个处理效果，每个效果都会保留在处理历史中</li>
+            <li><strong>实时预览</strong>：大多数处理对话框支持实时预览，调整参数时可即时查看效果</li>
+            <li><strong>撤销重做</strong>：支持多级撤销重做，可以安全地尝试各种处理效果</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>注意事项</h2>
+        <ul>
+            <li>处理大尺寸图像时，建议降低代理图像质量以提高响应速度</li>
+            <li>某些滤镜效果计算量较大，处理时间可能较长</li>
+            <li>保存图像时会覆盖原文件，建议提前备份重要图像</li>
+            <li>软件支持中文文件名，但建议使用英文路径以获得最佳兼容性</li>
+        </ul>
+    </div>
+</body>
+</html>
