@@ -1,4 +1,4 @@
-# Pixelix Image Processor (像素图像处理器)
+# Pixelix Image Processor
 
 [//]: # (Badges will go here later)
 
@@ -122,10 +122,6 @@ The project is organized to separate concerns, making it easier to maintain and 
 ```
 
 ## Contributing / 贡献指南
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-贡献是开源社区如此迷人的原因。我们非常感谢您的任何贡献。
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 
