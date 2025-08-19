@@ -135,7 +135,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 ## License / 许可证
 
-Copyright (c) 2024 望月星逸 (Wendystar)
+Copyright (c) 2025 望月星逸 (Wendystar)
 
 Distributed under the MIT License. See `LICENSE` file for more information.
 
