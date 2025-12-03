@@ -174,7 +174,7 @@ class ImageAnalysisEngine(QObject):
         if image.ndim == 3:
             # 对于彩色图像，计算每个通道的直方图
             hist_data = []
-            for i in range(3):  # BGR 通道
+            for i in range(3):  # RGB 通道 (因为输入图像是RGB格式)
                 hist = cv2.calcHist([image], [i], None, [256], [0, 256])
                 hist_data.append(hist.flatten())
             return hist_data
@@ -203,7 +203,7 @@ class ImageAnalysisEngine(QObject):
             parade_data = []
             
             # 对每个通道单独计算
-            for c in range(3):  # BGR通道
+            for c in range(3):  # RGB通道 (因为输入图像是RGB格式)
                 # 创建波形数据存储空间
                 parade = np.zeros((256, width), dtype=np.float32)
                 
@@ -252,14 +252,22 @@ class ImageAnalysisEngine(QObject):
         # 检查图像是否为彩色
         if image.ndim == 3:
             # 转换为HSV颜色空间
-            hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+            # 注意：输入图像为RGB格式，因此使用RGB2HSV
+            hsv_image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
 
             # 提取H和S通道
             h_channel = hsv_image[:, :, 0].flatten()  # 色相通道
             s_channel = hsv_image[:, :, 1].flatten()  # 饱和度通道
             
-            # 使用numpy的向量化操作高效计算直方图
-            h_hist = np.bincount(h_channel, minlength=180)
+            # 过滤低饱和度像素（背景/白色/黑色区域），只统计有色彩的区域
+            # 饱和度阈值设为 20 (约 8%)，低于此值的像素色相被认为是无效噪声
+            valid_mask = s_channel > 20
+            if np.any(valid_mask):
+                valid_h = h_channel[valid_mask]
+                h_hist = np.bincount(valid_h, minlength=180)
+            else:
+                h_hist = np.zeros(180, dtype=int)
+                
             s_hist = np.bincount(s_channel, minlength=256)
             
             # 确保返回一维数组（PyQtGraph需要一维数组）
@@ -410,10 +418,11 @@ class ImageAnalysisEngine(QObject):
         # 检查图像是否为彩色
         if image.ndim != 3:
             # 灰度图像转换为3通道
-            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
             
         # 转换为Lab色彩空间
-        lab_image = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+        # 注意：输入图像为RGB格式，因此使用RGB2LAB
+        lab_image = cv2.cvtColor(image, cv2.COLOR_RGB2LAB)
         
         # 计算色度散点数据
         chromaticity_data = ImageAnalysisEngine._calculate_lab_chromaticity_data(lab_image)
